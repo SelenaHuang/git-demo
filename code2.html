@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8"/>
+<link rel="profile" href="http://gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="http://blog.longwin.com.tw/wp-content/themes/twentyten/A.style.css.pagespeed.cf.nhnAt_7sRP.css"/>
+<link rel="pingback" href="http://blog.longwin.com.tw/xmlrpc.php"/>
+<!-- BEGIN Metadata added by Add-Meta-Tags WordPress plugin -->
+<meta name="description" content="Git 是套版本控制系統, 初學且最常用的, 就是官方網站的那兩個範例.(下述兩個取自官方範例) Cloning and Creating a Patch (從外面複製一份 git, 修改後並產生一份 Patch.) $ git clone git://github.com/git/hello-world."/>
+<meta name="keywords" content="my_note-unix, git"/>
+<meta name="referrer" content="origin">
+<meta name="google-translate-customization" content="6fc3f188ea42926e-49f50a6ef12efa32-g6f2c68bfc6d8597e-13">
+<!-- END Metadata added by Add-Meta-Tags WordPress plugin -->
+<!-- Jetpack Site Verification Tags -->
+<meta name="p:domain_verify" content="6430cc7475dd0db49c299212ec727f4a"/>
+<!-- This site is optimized with the Yoast WordPress SEO plugin v2.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Git 初學文件整理 - Tsung&#039;s Blog</title>
+<link rel="canonical" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/"/>
+<meta property="og:locale" content="zh_TW"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Git 初學文件整理 - Tsung&#039;s Blog"/>
+<meta property="og:description" content="Git 是套版本控制系統, 初學且最常用的, 就是官方網站的那兩個範例.(下述兩 &hellip; 繼續閱讀 &rarr;"/>
+<meta property="og:url" content="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/"/>
+<meta property="og:site_name" content="Tsung&#039;s Blog"/>
+<meta property="article:author" content="http://www.facebook.com/tsunghaolee"/>
+<meta property="article:tag" content="git"/>
+<meta property="article:section" content="My_Note-Unix"/>
+<meta property="article:published_time" content="2009-05-14T13:09:55+00:00"/>
+<meta property="article:modified_time" content="2015-04-26T14:33:24+00:00"/>
+<meta property="og:updated_time" content="2015-04-26T14:33:24+00:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:description" content="Git 是套版本控制系統, 初學且最常用的, 就是官方網站的那兩個範例.(下述兩 &hellip; 繼續閱讀 &rarr;"/>
+<meta name="twitter:title" content="Git 初學文件整理 - Tsung&#039;s Blog"/>
+<meta name="twitter:site" content="@tsung"/>
+<meta name="twitter:domain" content="Tsung&#039;s Blog"/>
+<meta name="twitter:creator" content="@tsung"/>
+<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","url":"http:\/\/blog.longwin.com.tw\/","name":"Tsung&#039;s Blog"}</script>
+<!-- / Yoast WordPress SEO plugin. -->
+<link rel="alternate" type="application/rss+xml" title="訂閱 Tsung&#039;s Blog &raquo;" href="http://blog.longwin.com.tw/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="訂閱 Tsung&#039;s Blog &raquo; 迴響" href="http://blog.longwin.com.tw/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="訂閱 Tsung&#039;s Blog &raquo; Git 初學文件整理 迴響" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/feed/"/>
+<script type="text/javascript">window._wpemojiSettings={"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/blog.longwin.com.tw\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-.1em!important;background:none!important;padding:0!important}</style>
+<style id='cptch_stylesheet-css' media='all'>.cptch_example_fields_actions{float:left;height:18px;width:140px;position:relative;top:-7px;padding:2px 0}.cptch_example_fields_actions img{position:relative;width:30px;top:6px}.cptch_block{direction:ltr}input.cptch_settings_input{width:252px}.cptch_span{color:#888;font-size:10px}.cptch_help_box{background-image:url(/wp-content/plugins/captcha/images/xtooltip_icons.png.pagespeed.ic.7MWyHTJqp2.png);background-repeat:no-repeat;cursor:pointer;float:left;height:29px;position:relative;margin:-3px 5px 3px;width:29px;clear:none!important}.cptch_hidden_help_text{background:#f4f4f4;border:1px solid #dcdcdc;border-radius:4px;left:40px;padding:5px 10px;position:absolute;width:240px;line-height:1.5}.cptch_hidden_help_text:before{content:url(/wp-content/plugins/captcha/images/help.png.pagespeed.ce.mCHKcnfh8c.png);left:-10px;position:absolute;top:7px}form input.cptch_input{padding-left:8px;padding-right:8px}</style>
+<link rel='stylesheet' id='genericons-css' href='http://blog.longwin.com.tw/wp-content/plugins/jetpack/_inc/genericons/genericons/A.genericons.css,qver=3.1.pagespeed.cf.NPz-yIFsxm.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='http://blog.longwin.com.tw/wp-content/plugins/jetpack/css/A.jetpack.css,qver=3.5.3.pagespeed.cf.b4c3r3EHXx.css' type='text/css' media='all'/>
+<script type='text/javascript' src='http://blog.longwin.com.tw/wp-includes/js/jquery/jquery.js,qver=1.11.2.pagespeed.jm.0kUhGt7Mm3.js'></script>
+<script src="http://blog.longwin.com.tw/wp-includes,_js,_jquery,_jquery-migrate.min.js,qver==1.2.1+wp-content,_plugins,_jquery-syntax,_jquery-syntax,_jquery.syntax.min.js,qver==4.2.2+wp-content,_plugins,_jetpack,_modules,_related-posts,_related-posts.js,qver==20150408+wp-content,_plugins,_jquery-image-lazy-loading,_js,_jquery.lazyload.min.js,qver==1.7.1+wp-content,_plugins,_jetpack,__inc,_postmessage.js,qver==3.5.3+wp-content,_plugins,_jetpack,__inc,_jquery.jetpack-resize.js,qver==3.5.3+wp-content,_plugins,_jetpack,__inc,_jquery.inview.js,qver==3.5.3.pagespeed.jc.UWgtnkT7MR.js"></script><script>eval(mod_pagespeed_Hf0$z$LmEX);</script>
+<script>eval(mod_pagespeed_rippSy3J_G);</script>
+<script>eval(mod_pagespeed_LXR2$C6BtQ);</script>
+<script>eval(mod_pagespeed_BoDVghwguW);</script>
+<script>eval(mod_pagespeed_2PBbgm0PO6);</script>
+<script>eval(mod_pagespeed_9uEesGJCJx);</script>
+<script>eval(mod_pagespeed_CnIDCUtIrL);</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.longwin.com.tw/xmlrpc.php?rsd"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.longwin.com.tw/wp-includes/wlwmanifest.xml"/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='shortlink' href='http://wp.me/p1s9D4-pQ'/>
+<!-- BEGIN License added by Creative-Commons-Configurator plugin for WordPress -->
+<style type="text/css">p.cc-block{clear:both;width:90%;margin:8px auto;padding:4px;text-align:center;border:1px solid #ccc;color:#000;background-color:#eef6e6}p.cc-block a:link,p.cc-block a:visited,p.cc-block a:hover,p.cc-block a:active{text-decoration:underline;color:#000}.cc-button{border-width:0}</style>
+<!-- END License added by Creative-Commons-Configurator plugin for WordPress -->
+<!-- The js code for google + 1  WordPress http://blog.dengruo.com/201107/1171 -->
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js" async>{lang: 'zh-TW'}</script><style type='text/css'>img.lazy{display:none}</style>
+<style media="screen">.syntax{font-size:80%}.syntax-container pre{font-size:80%!important;line-height:1.5em!important}.syntax-container li.alt{border-left:none}</style>
+<script type="text/javascript">jQuery.noConflict();jQuery(document).ready(function($){$.syntax({root:'http://blog.longwin.com.tw/wp-content/plugins/jquery-syntax/jquery-syntax/'})});</script>
+<!--MP Share Center Styles-->
+<style>.mp-share-buttons,.mp-share-boxes{display:inline}.mp-share-buttons li,.mp-share-boxes li{float:left;list-style:none!important;width:100px}.mp-share-clear-fix{clear:both}#mp-share-below-action{font-size:33px;line-height:36px;display:block;padding:5px}</style>
+<link rel="image_src" href=""/><!-- Facebook Like Thumbnail -->
+<script type="text/javascript">window._wp_rp_static_base_url='https://wprp.zemanta.com/static/';window._wp_rp_wp_ajax_url="http://blog.longwin.com.tw/wp-admin/admin-ajax.php";window._wp_rp_plugin_version='3.5.4';window._wp_rp_post_id='1602';window._wp_rp_num_rel_posts='5';window._wp_rp_thumbnails=true;window._wp_rp_post_title='Git+%E5%88%9D%E5%AD%B8%E6%96%87%E4%BB%B6%E6%95%B4%E7%90%86';window._wp_rp_post_tags=[];window._wp_rp_promoted_content=true;</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.5.4" async></script>
+<style>.wp_rp_wrap{clear:both}.wp_rp_wrap .related_post_title{background:rgba(245,245,245,1)!important;padding:3px 0 3px 10px!important;margin:0!important;font-weight:normal;border-radius:2px!important;border:1px solid rgba(0,0,0,.1)!important;clear:both!important}div.wp_rp_content{display:block!important}div.wp_rp_footer{text-align:right!important;overflow:hidden!important}div.wp_rp_footer a{color:#999!important;font-size:11px!important;text-decoration:none!important;display:inline-block!important}div.wp_rp_footer a.wp_rp_edit{color:#fff!important;font-size:12px!important;text-decoration:underline!important;font-weight:bold!important;background:#f79124!important;border-radius:2px!important;padding:3px 6px}ul.related_post{margin:0 0 18px 0!important;padding:0!important}ul.related_post li{position:relative!important;min-height:60px;list-style:none!important;padding:10px 0 10px 0!important;margin:0!important;border-bottom:1px solid rgba(0,0,0,.1)!important;background:none!important}ul.related_post li a{position:relative!important;text-decoration:none;text-indent:0!important}ul.related_post li a img{width:60px;height:60px;float:left!important;margin:0 10px 0 0!important;padding:0!important;max-width:100%!important;float:none!important}ul.related_post li a img.wp_rp_santa_hat{display:none!important}ul.related_post li a.title{vertical-align:top!important}ul.related_post li a.wp_rp_thumbnail{float:left!important;margin-right:10px!important}ul.related_post li a.wp_rp_thumbnail img{float:none!important;margin-right:0!important;display:block!important}</style>
+<!-- WP Favicon -->
+<link rel="shortcut icon" href="http://blog.longwin.com.tw/favicon.ico" type="image/x-icon"/>
+<link rel="icon" href="data:image/webp;base64,UklGRnQBAABXRUJQVlA4IGgBAADwBgCdASogACAAPm0wlEckIqIhKAqogA2JYgCdL7EmZhgDZjZp+606OJv5epEef9vT8WAqi9NjTfxvXmgF348AAP7/dvx8fML8zpalJHPvzXMeNlmERWneiel3DxdARnVWoVq+JbfRFrPHmen4cxvudf5L0OdVDBVeTgRqhn98/JpWm7z0WxPjt2Gmt+A6KmrhalBW56vsF4px/jrdu+SXgUxpMU1YnRWffOrMg6nxuCfEbSyi3IJqk567FqrIABtLrNRG9piPxZVCaDO8W1302fbke4SMNxioesju+AOtpzb69Bx4aaO+qw23z4rHW45zD1Zkj8PnipfDEn+zRqS3vibL9FIQb1uXpYA/5O9tXIY+OvyWLmawyh5xkk8fdn3M/KbwK0oUrYWQbq6ePui+iyClGDhKYDt9T0yec4EQRQKJCSSRSs5Uxyy/xuD0IU5JG/xq/qODXIRn9bZ5bUOhjHMH9hLoAAA=" type="image/gif"/>
+<!-- /WP Favicon -->
+<link rel='dns-prefetch' href='//widgets.wp.com'>
+<link rel='dns-prefetch' href='//s0.wp.com'>
+<link rel='dns-prefetch' href='//0.gravatar.com'>
+<link rel='dns-prefetch' href='//1.gravatar.com'>
+<link rel='dns-prefetch' href='//2.gravatar.com'>
+<!-- Tracking code easily added by NK Google Analytics -->
+<script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-101810-4','blog.longwin.com.tw',{});ga('send','pageview');</script>
+</head>
+<body class="single single-post postid-1602 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://blog.longwin.com.tw/" title="Tsung&#039;s Blog" rel="home">Tsung&#039;s Blog</a>
+</span>
+</div>
+<div id="site-description">個人筆記, 記錄關於 系統、程式、新聞 與 日常生活 等資訊</div>
+<script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/','ZSrIa4U5AZ',true,false,'pM0cyIs8A8Y');
+//]]></script><img src="http://blog.longwin.com.tw/wp-content/themes/twentyten/images/headers/940x198xberries.jpg.pagespeed.ic.zLLI4OrCnf.webp" width="940" height="198" alt="" pagespeed_url_hash="1802222836" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/>
+</div><!-- #branding -->
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="跳至內容">跳至內容</a></div>
+<div class="menu"><ul><li><a href="http://blog.longwin.com.tw/">首頁</a></li><li class="page_item page-item-4240"><a href="http://blog.longwin.com.tw/about/">關於我</a></li></ul></div>
+</div><!-- #access -->
+</div><!-- #masthead -->
+</div><!-- #header -->
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://blog.longwin.com.tw/2009/05/debian-linux-build-git-trac-2009/" rel="prev"><span class="meta-nav">&larr;</span> Debian Linux 架設 Git + Trac</a></div>
+<div class="nav-next"><a href="http://blog.longwin.com.tw/2009/05/git-initial-env-setup-2009/" rel="next">Git 基礎設定 (帳號的環境參數設定) <span class="meta-nav">&rarr;</span></a></div>
+</div><!-- #nav-above -->
+<div id="post-1602" class="post-1602 post type-post status-publish format-standard hentry category-my_note-unix tag-git">
+<h1 class="entry-title">Git 初學文件整理</h1>
+<div class="entry-meta">
+<span meta-prep meta-prep-author>發表於</span> <a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/" title="13:09:55" rel="bookmark"><span class="entry-date">2009 年 05 月 14 日</span></a> <span class="meta-sep">由</span> <span class="author vcard"><a class="url fn n" href="http://blog.longwin.com.tw/author/jon/" title="全部文章，由 Tsung">Tsung</a></span>	</div><!-- .entry-meta -->
+<div class="entry-content">
+<p><a title="Git - Fast Version Control System" href="http://git-scm.com/" target="_blank">Git</a> 是套版本控制系統, 初學且最常用的, 就是官方網站的那兩個範例.(下述兩個取自官方範例)</p>
+<p><span id="more-1602"></span></p>
+<h4>Cloning and Creating a Patch (從外面複製一份 git, 修改後並產生一份 Patch.)</h4>
+<ol>
+<li>$ git clone git://github.com/git/hello-world.git</li>
+<li>$ cd hello-world</li>
+<li>$ (edit files) # touch index.html</li>
+<li>$ git add (files) # 或 git add .</li>
+<li>$ git commit -m 'Explain what I changed'</li>
+<li>$ git format-patch origin/master # 產生 Patch =&gt; "0001-Explain-what-I-changed.patch"</li>
+</ol>
+<h4>Creating and Commiting (快速建立 Local Repository)</h4>
+<ol>
+<li>$ cd (project-directory)</li>
+<li>$ git init</li>
+<li>$ (add some files) # touch index.html</li>
+<li>$ git add .</li>
+<li>$ git commit -m 'Initial commit'</li>
+</ol>
+<p>要再深入學習, 可見下述文件資料.</p>
+<h4>教學文件</h4>
+<ul>
+<li><a title="Git - Evgeny Goldin" href="http://evgeny-goldin.com/wiki/Git" target="_blank">Git - Evgeny Goldin</a> - Git 所有指令介紹, 有很清楚的圖文介紹說明 - 推薦</li>
+<li><a title="A Visual Git Reference" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">A Visual Git Reference</a> - Git 原理, 很清楚的圖文解釋 - 推薦</li>
+<li><a title="Git Community Book" href="http://book.git-scm.com/" target="_blank">Git Community Book</a> - 建議下載此電子書來看</li>
+<li><a title="Git Community Book 中文版" href="http://gitbook.liuhui998.com/index.html" target="_blank">Git Community Book 中文版</a> - 簡體中文版</li>
+<li><a title="Git Magic - Preface" href="http://www-cs-students.stanford.edu/~blynn/gitmagic/" target="_blank">Git Magic - Preface</a> - 也是線上電子書</li>
+<li><a title="Git - Fast Version Control System" href="http://git-scm.com/documentation" target="_blank">Git - Fast Version Control System</a></li>
+<li><a title="git ready ? learn git one commit at a time" href="http://www.gitready.com/" target="_blank">git ready ? learn git one commit at a time</a></li>
+<li><a title="Git 中文教程" href="http://www.bitsun.com/documents/gittutorcn.htm" target="_blank">Git 中文教程</a></li>
+</ul>
+<h4>Git 說明文件</h4>
+<ul>
+<li><a title="Git Documentation" href="http://git.or.cz/gitwiki/GitDocumentation" target="_blank">Git Documentation</a></li>
+<li><a title="gittutorial(7) Manual Page" href="http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html" target="_blank">gittutorial(7) Manual Page</a></li>
+<li><a title="GitGlossary(Git 名詞解釋)" href="http://git.or.cz/gitwiki/GitGlossary" target="_blank">GitGlossary(Git 名詞解釋)</a></li>
+</ul>
+<h4>GitHub 文件</h4>
+<ul>
+<li><a title="Learn.GitHub - Introduction To Git" href="http://learn.github.com/" target="_blank">Learn.GitHub - Introduction To Git</a></li>
+<li><a title="GitHub Guides" href="http://github.com/guides/home" target="_blank">GitHub Guides</a></li>
+<li><a title="Guides: Providing your SSH Key" href="http://github.com/guides/providing-your-ssh-key" target="_blank">Guides: Providing your SSH Key</a></li>
+</ul>
+<h4>Git 教學影片</h4>
+<ul>
+<li><a title="RailsConf Git Talk" href="http://www.gitcasts.com/posts/railsconf-git-talk" target="_blank">RailsConf Git Talk</a></li>
+<li><a title="Git The Basics Tutorial" href="http://excess.org/article/2008/07/ogre-git-tutorial/" target="_blank">Git The Basics Tutorial</a></li>
+</ul>
+<h4>Git 小抄</h4>
+<ul>
+<li><a title="Git cheatsheet" href="http://jan-krueger.net/development/git-cheat-sheet-extended-edition" target="_blank">Git cheatsheet</a></li>
+<li><a title="Git cheatsheet (Github)" href="http://github.com/guides/git-cheat-sheet" target="_blank">Git cheatsheet (Github)</a></li>
+<li><a title="$ cheat git" href="http://cheat.errtheblog.com/s/git" target="_blank">$ cheat git</a></li>
+<li><a title="Git by Example" href="http://sysmonblog.co.uk/misc/git_by_example/" target="_blank">Git by Example</a></li>
+</ul>
+<h4>GIT 與 SVN 指令對照</h4>
+<ul>
+<li><a title="Git - SVN Crash Course" href="http://git.or.cz/course/svn.html" target="_blank">Git - SVN Crash Course</a></li>
+<li><a title="Multiple branches using git-svn" href="http://www.dmo.ca/blog/20070608113513/" target="_blank">Multiple branches using git-svn</a> - SVN branch 於 GIT 如何設定</li>
+<li><a title="Develop with Git on a Google Code Project" href="http://google-opensource.blogspot.com/2008/05/develop-with-git-on-google-code-project.html" target="_blank">Develop with Git on a Google Code Project</a></li>
+</ul>
+<h4>相關網頁</h4>
+<ul>
+<li><a title="Learning git" href="http://people.debian.org.tw/~chihchun/2008/08/20/learning-git/" target="_blank">Learning git</a></li>
+<li><a title="Linus Torvalds on git" href="http://people.debian.org.tw/~chihchun/2008/12/19/linus-torvalds-on-git/" target="_blank">Linus Torvalds on git</a></li>
+<li><a title="一小時內搞懂 Git" href="http://people.debian.org.tw/~chihchun/2009/01/05/understand-git-in-one-hour/" target="_blank">一小時內搞懂 Git</a> - <a title="Getting Git" href="http://www.slideshare.net/chacon/getting-git" target="_blank">Getting Git ppt</a></li>
+<li><a title="Git 原始碼管理" href="http://www.qweruiop.org/nchcrails/posts/49" target="_blank">Git 原始碼管理</a> - 範例教學, 初學建議可由此開始</li>
+<li><a title="Git 版本控制系統 (1)" href="http://ihower.idv.tw/blog/archives/2591" target="_blank">Git 版本控制系統 (1)</a> - ihower 這一系列, 初學完, 想再深入了解原理的, 可看這一系列的文件</li>
+<li><a title="Git 版本控制系統(2) 開 branch 分支和操作遠端 repo." href="http://ihower.idv.tw/blog/archives/2620" target="_blank">Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.</a></li>
+<li><a title="[Git] how to remove file and commit from history(如何移除 commit 歷史紀錄)" href="http://blog.wu-boy.com/2009/12/29/1918/" target="_blank">[Git] how to remove file and commit from history(如何移除 commit 歷史紀錄)</a></li>
+<li><a title="Git 的入門與實踐" href="http://www.ghostunix.org/blog/?p=41" target="_blank">Git 的入門與實踐</a></li>
+<li><a href="http://www.ithome.com.tw/news/95283" target="_blank">Git達人教你搞懂GitHub基礎觀念</a></li>
+</ul>
+<p><!-- If u want to theme it yourself, plz put this code where you want --><br/><br/>
+<g:plusone size=""></g:plusone></p>
+<!-- Quick Adsense WordPress Plugin: http://quicksense.net/ -->
+<div style="float:none;margin:10px 0 10px 0;text-align:center;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Blog - 336 x 280 --> <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-2833110699572522" data-ad-slot="6353348500"></ins> <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<div style="font-size:0px;height:0px;line-height:0px;margin:0;padding:0;clear:both"></div>
+<div class="wp_rp_wrap  wp_rp_modern" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">延伸閱讀</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-3102" data-post-type="none"><a href="http://blog.longwin.com.tw/2011/12/git-magic-free-book-2011/" class="wp_rp_thumbnail"><img src="data:image/webp;base64,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" alt="Git Magic 免費電子書" pagespeed_url_hash="2168848561" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a><a href="http://blog.longwin.com.tw/2011/12/git-magic-free-book-2011/" class="wp_rp_title">Git Magic 免費電子書</a></li><li data-position="1" data-poid="in-2092" data-post-type="none"><a href="http://blog.longwin.com.tw/2011/03/linux-gitosis-git-server-2011/" class="wp_rp_thumbnail"><img src="data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAABwCQCdASqWAJYAPtFosFMoJaooIGhBQBoJaW7g9u6IsqkA7s6dOnTp06dOnVHZHVq1atWrVq1ce6Zs2bTMfUMsqYSrpP+DQmTeHjiLA2GdSWTJZAAA/svwP9WWohyP/ri5sh9u2FnsY5E1DD3yk37wrX4EwsA5EWHlg+pTY7+t4UH37gNdqiVO2s1Ca0E3IUgFGseU3hJcRK33Q4etCyz1iyukE7hdmo9btbh65H1C4MYgI3qAsSWvQ1m2bMfe2+vQiOkyREBDP7QOCbkUJRtqT4bqwUUmNhmse1FeAAA=" alt="Linux 使用 Gitosis 架設 Git Server" pagespeed_url_hash="1919980534" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a><a href="http://blog.longwin.com.tw/2011/03/linux-gitosis-git-server-2011/" class="wp_rp_title">Linux 使用 Gitosis 架設 Git Server</a></li><li data-position="2" data-poid="in-2093" data-post-type="none"><a href="http://blog.longwin.com.tw/2011/03/linux-gitolite-git-server-2011/" class="wp_rp_thumbnail"><img src="http://blog.longwin.com.tw/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/150x150x17.jpg.pagespeed.ic.aRQI1nKVOm.webp" alt="Linux 使用 Gitolite 架設 Git Server" width="150" height="150" pagespeed_url_hash="3467696152" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a><a href="http://blog.longwin.com.tw/2011/03/linux-gitolite-git-server-2011/" class="wp_rp_title">Linux 使用 Gitolite 架設 Git Server</a></li><li data-position="3" data-poid="in-3901" data-post-type="none"><a href="http://blog.longwin.com.tw/2012/10/git-diff-directory-2012/" class="wp_rp_thumbnail"><img src="data:image/webp;base64,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" alt="使用 Git / Diff 比較目錄內所有檔案的差異" pagespeed_url_hash="696348956" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a><a href="http://blog.longwin.com.tw/2012/10/git-diff-directory-2012/" class="wp_rp_title">使用 Git / Diff 比較目錄內所有檔案的差異</a></li><li data-position="4" data-poid="in-3784" data-post-type="none"><a href="http://blog.longwin.com.tw/2012/07/git-immersion-book-2012/" class="wp_rp_thumbnail"><img src="data:image/webp;base64,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" alt="Git immersion 入門教學文件" pagespeed_url_hash="1285348798" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a><a href="http://blog.longwin.com.tw/2012/07/git-immersion-book-2012/" class="wp_rp_title">Git immersion 入門教學文件</a></li></ul></div></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/?share=email" target="_blank" title="點這裡寄給朋友"><span>電子郵件</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/#print" target="_blank" title="點這裡列印"><span>列印</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1602" class="share-facebook sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/?share=facebook" target="_blank" title="分享到 Facebook"><span>Facebook</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-1602" class="share-linkedin sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/?share=linkedin" target="_blank" title="分享到 LinkedIn"><span>LinkedIn</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1602" class="share-twitter sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/?share=twitter" target="_blank" title="分享到 Twitter"><span>Twitter</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-1602" class="share-google-plus-1 sd-button share-icon" href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/?share=google-plus-1" target="_blank" title="點擊分享到 Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><span id='mp-share-below-action'></span><ul class='mp-share-buttons'><li class='mp-share-buttons-fb'><iframe src='http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fblog.longwin.com.tw%2F2009%2F05%2Fgit-learn-initial-document-2009%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe></li><li class='mp-share-buttons-tw'><a href='http://twitter.com/share?url=http%3A%2F%2Fwp.me%2Fp1s9D4-pQ&amp;counturl=http%3A%2F%2Fblog.longwin.com.tw%2F2009%2F05%2Fgit-learn-initial-document-2009%2F' class='twitter-share-button' data-count='horizontal' data-via='tsung'></a></li><li class='mp-share-buttons-gp'><g:plusone href='http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/' size='medium'></g:plusone></li><li class='mp-share-buttons-li'><script type='in/share' data-url='http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/' data-counter='right'></script></li></ul><div class='mp-share-clear-fix'></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-21486538-1602-555183501a441' data-src='//widgets.wp.com/likes/#blog_id=21486538&amp;post_id=1602&amp;origin=blog.longwin.com.tw&amp;obj_id=21486538-1602-555183501a441' data-name='like-post-frame-21486538-1602-555183501a441'><h3 class='sd-title'>請按讚：</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height:55px'><span class='button'><span>喜歡</span></span> <span class="loading">載入中...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts'>
+<h3 class="jp-relatedposts-headline"><em>相關</em></h3>
+</div>
+<!-- BEGIN License added by Creative-Commons-Configurator plugin for WordPress -->
+<p class="cc-block">Copyright &copy; 2009 - All Rights Reserved</p>
+<!-- END License added by Creative-Commons-Configurator plugin for WordPress -->
+</div><!-- .entry-content -->
+<div id="entry-author-info">
+<div id="author-avatar">
+<img alt='' src='data:image/webp;base64,UklGRmIDAABXRUJQVlA4IFYDAADwDwCdASo8ADwAPm0ylUakIyIhLBqpmIANiUAYzofJMRU30XkvAPXL8EZi/CLTATUfL/mO8a39nOEHNJM668MeJJr9BfJyMx8uwtCItcvW+YXulvvmpy5PiKzTdM0GfJ328pSf5TKbJIm/jDK7FIJepJCuuxwIX+113b4vvwg7yk/fCQ8WAWZAAP7/mD4f//TG7Xn/v7wI+Q9M9Q0AInv/5IsPOZyRRrUm5Tcortd3i4K3OumP4JQDQqd9//n0kPlGLMx+Vhq17D2cFLfN5Ig3pfRL1m/OMQam+mmYH14RiR1YLwdbwLsUCcYOMAe1ZJ6Rp8wypeTxcGAkW/8YPEjYI20J8WHXxXzAG7KWJP6fofST9ePEzkGi7MLOLbJQHI9E8OSWWWcNG49SNh2r+9Oqxlcr9Xfm/iPM5if12SZSRO+0d/f6zRKoq12NBXWN/Ok3S9w+Hk11Zy/LQ/hoqEXUGte/sULdNVu6xj/bXlU9A96pc4Oqpq7IXIRURrwt2tsLp0h+C9YyV+82SuXJ4XCo2rghW88AVluRJhWM7tc5iE5iXc9Wxk1E2I1+uYwJ9Z7iMX2WPeBIr/dUsXV1drn7+OG3C1dN4/YYebHAU8zVhk4TPr/uUIHoy4RaXsEi/Rgm5Jkbej4x/q91akCc8AI5I6bHU6/12OzbZs7WEhMx4e8swCfDESM4nX9961V8e5LqYhvY3Jy/yMhgn3zU08hEjNkIZE+YjO6mXBI6A25YjKIZxULN84pJgksR/+H0orW+/PqFscQ/Uiea8LBSHTjE0oyFZT0SD13kIkZKRZpbHhnk63uEN+PLP9ruzTHfYLNRkwSGVHQTzFjVi2PoVtRJk9tNuIvmPdO99B2qSwO6yW5XUe1DjThDPj1TcvuRyDHGbjm42eRXzBKix1BER6GLUESbaJGSJYZDgaHEr2x9KrGTyfzbhQD+46Acxo+NTol1J4/cRbaeAYMdhLffZs9W6dqmgWk08bY0ig3aiA9l+tdVEpzEdedni0//EsRzOFbUxUpt+co1B1l6jYXQZwJCEqhekl38/Lb5RDbezj1kwPy3ic2tF07KcEupUBBZRKJDYqUgsUnov+8qg+ZbXqZ1EYkurDE0betjwyaJB/w5tkGM+fsAAA==' class='avatar avatar-60 photo' pagespeed_url_hash="1818548801" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/>	</div><!-- #author-avatar -->
+<div id="author-description">
+<h2>關於 Tsung</h2>
+對新奇的事物都很有興趣, 喜歡簡單的東西, 過簡單的生活.	<div id="author-link">
+<a href="http://blog.longwin.com.tw/author/jon/" rel="author">
+檢視由 Tsung 發表的文章 <span class="meta-nav">&rarr;</span>	</a>
+</div><!-- #author-link	-->
+</div><!-- #author-description -->
+</div><!-- #entry-author-info -->
+<div class="entry-utility">
+本篇發表於 <a href="http://blog.longwin.com.tw/category/my_note-unix/" rel="category tag">My_Note-Unix</a> 並標籤為 <a href="http://blog.longwin.com.tw/tag/git/" rel="tag">git</a>。將<a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/" title="Git 初學文件整理 的永久鏈結" rel="bookmark">永久鏈結</a>加入書籤。	</div><!-- .entry-utility -->
+</div><!-- #post-## -->
+<div id="nav-below" class="navigation">
+<div class="nav-previous"><a href="http://blog.longwin.com.tw/2009/05/debian-linux-build-git-trac-2009/" rel="prev"><span class="meta-nav">&larr;</span> Debian Linux 架設 Git + Trac</a></div>
+<div class="nav-next"><a href="http://blog.longwin.com.tw/2009/05/git-initial-env-setup-2009/" rel="next">Git 基礎設定 (帳號的環境參數設定) <span class="meta-nav">&rarr;</span></a></div>
+</div><!-- #nav-below -->
+<div id="comments">
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">發表迴響 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2009/05/git-learn-initial-document-2009/#respond" style="display:none;">取消回覆</a></small></h3>
+<form action="http://blog.longwin.com.tw/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">你的電子郵件位址並不會被公開。</span> 必要欄位標記為 <span class="required">*</span></p>	<p class="comment-form-author"><label for="author">名稱 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required'/></p>
+<p class="comment-form-email"><label for="email">電子郵件 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
+<p class="comment-form-url"><label for="url">個人網站</label> <input id="url" name="url" type="text" value="" size="30"/></p>
+<p class="cptch_block"><br/>	<input type="hidden" name="cptch_result" value="S479"/>
+<input type="hidden" name="cptch_time" value="1431405391"/>
+<input type="hidden" value="Version: 4.1.1"/>
+9 &#43; 六 = <input id="cptch_input" class="cptch_input" type="text" autocomplete="off" name="cptch_number" value="" maxlength="2" size="2" aria-required="true" required="required" style="margin-bottom:0;display:inline;font-size: 12px;width: 40px;"/></p>	<p class="comment-form-comment"><label for="comment">迴響</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>	<p class="form-allowed-tags" id="form-allowed-tags">你可以使用這些 <abbr title="HyperText Markup Language">HTML</abbr> 標籤與屬性： <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="張貼迴響"/> <input type='hidden' name='comment_post_ID' value='1602' id='comment_post_ID'/>
+<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="cb10592368"/></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">用電子郵件通知我後續的迴響。</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">新文章使用電子郵件通知我。</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="166"/></p>	</form>
+</div><!-- #respond -->
+</div><!-- #comments -->
+</div><!-- #content -->
+</div><!-- #container -->
+<div id="primary" class="widget-area" role="complementary">
+<ul class="xoxo">
+<!-- Quick Adsense Wordpress Plugin: http://quicksense.net/ -->
+<li id="adswidget1-quick-adsense" class="widget-container ">
+<form action="http://www.google.com.tw/cse" id="cse-search-box"> <div> <input type="hidden" name="cx" value="partner-pub-2833110699572522:4337510249"> <input type="hidden" name="ie" value="UTF-8"> <input type="text" name="q" size="20" x-webkit-speech> <input type="submit" name="sa" value="&#x641c;&#x5c0b;"> </div> </form> <script type="text/javascript" src="http://www.google.com.tw/coop/cse/brand?form=cse-search-box&amp;lang=zh-TW"></script>
+</li><li id="profilepic_widget" class="widget-container profilepic_widget"><h3 class="widget-title">自我介紹</h3><div id='profilepic_profile'><img src="data:image/webp;base64,UklGRsYHAABXRUJQVlA4ILoHAADwJwCdASp4AHgAPm0sk0YkIqGhMBMLgIANiWUA0iyYrK+m1iR75boNrfq7y914hBOs1to8d4IK92mDeszt1M7Z478lsmgMLBPDZ0+CLy4irxfSwD0DuqVkYsuyHld3Bedm/aok3iw1FZPe8R1CTuVmRvOgmrMbOPr6q2FLEA5dF2Md/ejrTZSohNyU1ASLisGAO69+j6bKnfD/UHIJnfGpEvmHyv3tzg0q0IrAxK0X4eVtTMDB1mPdUPR7gHqoqZq9fBcudv+xdF7s2FxuWvq0VjKdCNre+Ba43DVvnD6sBe3y5dSnSYsdAqmQQUgKQh1JQuqKGbjPygZIZdpN7yVHJiwai0+fQVreZ01yV9kBLiUuC7pwAH0ixeqfcHBG9D8VMzP1devcnyj+S7XPMpUK+56xcExmVvBFixkHrbb5XNt0sRmsWoAAAP787OfVIKg//mi8rf/qhI3t+ZvfBhsrQHP8R0+NteV54cGhD0WOAm/wmYqBgls+oeLQnDv+s/9zYfLwhA/kMrMau52lY9LgA2vXGWmab8RsAgOwQGVFVyWhnsAdFykOamJroLLS3LFz+OGTiz3xcjcylfaAbK4+WVAskwmvcMjixGtJDv/fej2P6I20hQm+oUn7vwmPyMRV8EgPcb8QLfrboQCfxESNDjMg/iag9E8ytPVtOpkBOdGC+BaqMgXLdRwByG6dPxOuYWrR8tdjFVFjZJJTWtC8AE0QQpUUB+d+9Ccor8XfvPwhPR1wkEZJheRnTiEF2TSVZykB3ZKUTWxrSf8hGOIj1qsMqlElyjDunYBQvI5GNf4AzQv97a4t3pilNIYCny0yejOB6sqgzEOcNBX5u41VLOVaeZyMpYQEgZThPtdQ+3jpsCuwnZNXi0CwH084s+H4WWFJ6NXG5Hakr+Fvkj/N4rVQqq0sTW0CAnTlS2Y3N+I8kEScJc5s2T5xVgMBnc0b3qZK0u4QS3SaP8YW8OkdBCK6KSN0hBp3DPQxiycnw09RpDjmX9CF12XxxE+GGebpAQqmwfgohWLqUT5pQSPh1Uh3ViGRnCtx+OGQE8gzv+VgnLPLFHf7JyFbkNhds2SleasiytF3pWVzpIDR4Dd1YQALXw6CKxuaQreOzSVRSzGctVqZXe3Xn1GCIq+CDWnowrs/P4OB1fFi78Q5tsscgmZw492K99+mb3r24UteCWFdSX3SyxiehHt7IrTXShHSqHc9CBL1xkrnC02hcJaQerTBr+y4XrY/dPuTMjjkzgVK+di+AOVtvOcYiEl1FWJd6Rl4Kh2//vaH2+i3irkRh1WvhxV0rJSvfd48fOXW7LjmhjQO/E5p2Iv8hEzO+kvjU2NFdziP4Z2xf7oWc3/3gu7UO6eE9wQSGlHVJ837RwQHdmaMP8NzTATJ6Y7PbUv0iRUtekfAQTNu/cdl0qXn0ztcmsx+JIEBHygUWsxBw/GmO/xPCv2uar+nXr8YFJDmeD8H+WzPGsfzB3f9Fkf8Q/lOLMQf5IW2VAZ28JzVQQo7yn/OXqfZGX3kTf4dtYoQRMQ/ZW/Ze7XPRzzm3PdmkxEw7vw7g46Dw+XE/YVhlIzJRNQObsTnV873Ts7CVryfEA3NJubFoIDsNemYjHk/fzgu14sEpu719Do3rNNVhKaNWZaYRZ+iKlpDbPIsmB5Y+G3l+iJRXAOpIMVQ9S5YJQRtzAaZaL1OOElzKLWZ/A2IxuDlaGW527A3gqeGaUrxAo71xs8joncPonILIfTqFAao79XqLeMTi21lp/eaqHJm10lYCTJiMmcjLuhAtQ2mZ5GKtWfs513BaJWuwl+ACTnWK3In3kqZL+6t5FeyalnpHPqPmyxF34FBt84zQHRq9kJvYf4elr6uLj6lPw+JHSI62DhbjV7p/A8IAgUfmDD27i4dmgFrcrWgBviLjSsUK70DKxP4nc/bc9evd9wOdHlFouxmlzNU3eZWmdXGQfOdleLyr5ewHtPDdWmZbVNP0c+GBrs96f8cRVCrjY1OXOGLje3Az7Ictiu/DogxffhT4vxVzMzstG1Mt8m0BBQINetBImS96BAwZLKsb9qwo1rv2bQsNOBSDJdlXu4Oao7zz/PjEd8pEry7ZJvvZ80HVyg/4rJKDfbbFUmaK4yImx8SE+c4N6THTHEO8f3fyYfv8CzajPSPRRlHlHQmd6Tv422AwEduAZhp2wyM6h7z5tEoARnljBzqfm8F3JqrIP6TvUMzdMgJvTzAlVvbqZldlvNuNej/fj1SucQzL2fdwCUG4dNRkkla3qIZD+zZ7c32fo2C1X2aUkoIABF1Be/jAcmzXEsFQJ2/UFHtgHV7+B1D+Y7ne4V1uMwLlgZKWRGVMMrijseKbndyXnng55tsd7XdHL5SFLTssZ33Dw9ChkB4ZEqX7tJZ4AhNnURgXq77iI2Dkz8oJvqXgUKhG/CpU/PojtC5MS7S6ULWJ4CxYf+Y3YG5Xq/9CG2npqgwEPBYf7Rq3mlE/DXSUWWe8mFgh9FXbvvLxjYBXJoCxGsQ43mqSR5EaoeeIqwsgIJMfiL0TWo8DHm1W1AiKEBQ38M1CPO2QpkEjUSI8BewR0JRjdQxCzBMZVkjrJABkhji1xEwcj+zRxaUHyXYUrEJgX9AKQxJqx7bAAAA" id="authorpic" pagespeed_url_hash="1818548801" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></div></li><li id="wpew_widgets_content-2" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">Email</h3><p><img src="http://blogs.longwin.com.tw/wordpress/email.png" alt="Email" pagespeed_url_hash="1849593487" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></p></li><li id="wpew_widgets_content-7" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">即時訪客</h3><div class="sitetag-abadge-container" style="position:relative;"><a target="_blank" href="http://sitetag.us/" style="position:absolute;top:5px;right:5px;_right:10px;background:url(http://static.sitetag.us/favicon.ico) no-repeat 0 2px;border:none;color:#fc0!important;font-family:Georgia!important;font-style:italic!important;padding-left:18px">SiteTag</a><script type="text/javascript" src="http://pub.sitetag.us/abadge.js?hash=5785c66d0cd372c374d01b2c680fc690&background_color=FFF&border_color=2483b6&border_width=3&inner_background_color=fbfbfb&color=0e0e33&limit=5"></script></div></li>
+<!-- Quick Adsense Wordpress Plugin: http://quicksense.net/ -->
+<li id="adswidget2-quick-adsense" class="widget-container ">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Side module - 160 x 600 --> <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-2833110699572522" data-ad-slot="0296291804"></ins> <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</li><li id="categories-6" class="widget-container widget_categories"><h3 class="widget-title">文章分類</h3>	<ul>
+<li class="cat-item cat-item-10"><a href="http://blog.longwin.com.tw/category/application/">Application</a>
+</li>
+<li class="cat-item cat-item-672"><a href="http://blog.longwin.com.tw/category/camp-2/" title="露營">Camp</a>
+</li>
+<li class="cat-item cat-item-19"><a href="http://blog.longwin.com.tw/category/document-ebook/">Document-Ebook</a>
+</li>
+<li class="cat-item cat-item-34"><a href="http://blog.longwin.com.tw/category/innovation/">Innovation</a>
+</li>
+<li class="cat-item cat-item-29"><a href="http://blog.longwin.com.tw/category/my_note/">My_Note</a>
+</li>
+<li class="cat-item cat-item-31"><a href="http://blog.longwin.com.tw/category/my_note-app-setting/">My_Note-App-Setting</a>
+</li>
+<li class="cat-item cat-item-30"><a href="http://blog.longwin.com.tw/category/my_note-plog/">My_Note-pLog</a>
+</li>
+<li class="cat-item cat-item-28"><a href="http://blog.longwin.com.tw/category/my_note-programming/">My_Note-Programming</a>
+</li>
+<li class="cat-item cat-item-27"><a href="http://blog.longwin.com.tw/category/my_note-unix/">My_Note-Unix</a>
+</li>
+<li class="cat-item cat-item-25"><a href="http://blog.longwin.com.tw/category/my-favorite-site/">My-Favorite-Site</a>
+</li>
+<li class="cat-item cat-item-20"><a href="http://blog.longwin.com.tw/category/my-life/">My-Life</a>
+</li>
+<li class="cat-item cat-item-23"><a href="http://blog.longwin.com.tw/category/news/">News</a>
+</li>
+<li class="cat-item cat-item-33"><a href="http://blog.longwin.com.tw/category/news_security/">News_Security</a>
+</li>
+<li class="cat-item cat-item-32"><a href="http://blog.longwin.com.tw/category/news-application/">News-Application</a>
+</li>
+<li class="cat-item cat-item-24"><a href="http://blog.longwin.com.tw/category/news-google-yahoo/">News-Google-Yahoo</a>
+</li>
+<li class="cat-item cat-item-21"><a href="http://blog.longwin.com.tw/category/news-life-joke/">News-Life-Joke</a>
+</li>
+<li class="cat-item cat-item-22"><a href="http://blog.longwin.com.tw/category/news-technology/">News-Technology</a>
+</li>
+<li class="cat-item cat-item-16"><a href="http://blog.longwin.com.tw/category/news-unix/">News-Unix</a>
+</li>
+<li class="cat-item cat-item-18"><a href="http://blog.longwin.com.tw/category/news-windows/">News-Windows</a>
+</li>
+<li class="cat-item cat-item-2"><a href="http://blog.longwin.com.tw/category/os-linux_bsd/">OS-Linux_BSD</a>
+</li>
+<li class="cat-item cat-item-4"><a href="http://blog.longwin.com.tw/category/program/">Program</a>
+</li>
+<li class="cat-item cat-item-17"><a href="http://blog.longwin.com.tw/category/programming/">Programming</a>
+</li>
+<li class="cat-item cat-item-7"><a href="http://blog.longwin.com.tw/category/windows/">Windows</a>
+</li>
+<li class="cat-item cat-item-46"><a href="http://blog.longwin.com.tw/category/wordpress/">WordPress</a>
+</li>
+<li class="cat-item cat-item-9"><a href="http://blog.longwin.com.tw/category/%e5%a5%bd%e7%ab%99%e6%8e%a8%e8%96%a6/">好站推薦</a>
+</li>
+<li class="cat-item cat-item-5"><a href="http://blog.longwin.com.tw/category/%e6%95%99%e5%ad%b8%e6%96%87%e4%bb%b6/">教學文件</a>
+</li>
+<li class="cat-item cat-item-3"><a href="http://blog.longwin.com.tw/category/%e6%96%87%e7%ab%a0/">文章</a>
+</li>
+<li class="cat-item cat-item-1"><a href="http://blog.longwin.com.tw/category/%e6%97%a5%e8%a8%98/">日記</a>
+</li>
+<li class="cat-item cat-item-8"><a href="http://blog.longwin.com.tw/category/%e7%94%9f%e6%b4%bb/">生活</a>
+</li>
+<li class="cat-item cat-item-11"><a href="http://blog.longwin.com.tw/category/%e7%a7%91%e6%8a%80%e6%96%b0%e8%81%9e/">科技新聞</a>
+</li>
+<li class="cat-item cat-item-6"><a href="http://blog.longwin.com.tw/category/%e8%bd%89%e8%bc%89%e6%96%b0%e8%81%9e/">轉載新聞</a>
+</li>
+<li class="cat-item cat-item-12"><a href="http://blog.longwin.com.tw/category/%e9%9b%bb%e5%ad%90%e6%9b%b8/">電子書</a>
+</li>
+</ul>
+</li><li id="recent-comments-3" class="widget-container widget_recent_comments"><h3 class="widget-title">近期迴響</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='http://blog.longwin.com.tw/' rel='external nofollow' class='url'>Tsung</a></span> 在 <a href="http://blog.longwin.com.tw/2015/05/microsoft-windows-visual-studio-platform-2015/#comment-58506">微軟 Windows 10 和 Visual Studio 跨平台</a></li><li class="recentcomments"><span class="comment-author-link">otaku119</span> 在 <a href="http://blog.longwin.com.tw/2015/05/microsoft-windows-visual-studio-platform-2015/#comment-58505">微軟 Windows 10 和 Visual Studio 跨平台</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://blog.longwin.com.tw/' rel='external nofollow' class='url'>Tsung</a></span> 在 <a href="http://blog.longwin.com.tw/2005/05/q_english_name/#comment-58504">查詢自己的英文名字</a></li><li class="recentcomments"><span class="comment-author-link">陳芳柔</span> 在 <a href="http://blog.longwin.com.tw/2005/05/q_english_name/#comment-58502">查詢自己的英文名字</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://thinkdifferentca.blogspot.tw/' rel='external nofollow' class='url'>Ca</a></span> 在 <a href="http://blog.longwin.com.tw/2012/09/vim-last-read-line-2012/#comment-58501">Vim 自動回到檔案最後讀取位置 設定</a></li></ul></li><li id="archives-3" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>	<label class="screen-reader-text" for="archives-dropdown-3">Archives</label>
+<select id="archives-dropdown-3" name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'>
+<option value="">選擇月份</option>
+<option value='http://blog.longwin.com.tw/2015/05/'> 2015 年 五月 &nbsp;(6)</option>
+<option value='http://blog.longwin.com.tw/2015/04/'> 2015 年 四月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2015/03/'> 2015 年 三月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2015/02/'> 2015 年 二月 &nbsp;(13)</option>
+<option value='http://blog.longwin.com.tw/2015/01/'> 2015 年 一月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/12/'> 2014 年 十二月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2014/11/'> 2014 年 十一月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/10/'> 2014 年 十月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/09/'> 2014 年 九月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2014/08/'> 2014 年 八月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/07/'> 2014 年 七月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/06/'> 2014 年 六月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/05/'> 2014 年 五月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2014/04/'> 2014 年 四月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2014/03/'> 2014 年 三月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2014/02/'> 2014 年 二月 &nbsp;(17)</option>
+<option value='http://blog.longwin.com.tw/2014/01/'> 2014 年 一月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2013/12/'> 2013 年 十二月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2013/11/'> 2013 年 十一月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2013/10/'> 2013 年 十月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2013/09/'> 2013 年 九月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2013/08/'> 2013 年 八月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2013/07/'> 2013 年 七月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2013/06/'> 2013 年 六月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2013/05/'> 2013 年 五月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2013/04/'> 2013 年 四月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2013/03/'> 2013 年 三月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2013/02/'> 2013 年 二月 &nbsp;(17)</option>
+<option value='http://blog.longwin.com.tw/2013/01/'> 2013 年 一月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2012/12/'> 2012 年 十二月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2012/11/'> 2012 年 十一月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2012/10/'> 2012 年 十月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2012/09/'> 2012 年 九月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2012/08/'> 2012 年 八月 &nbsp;(2)</option>
+<option value='http://blog.longwin.com.tw/2012/07/'> 2012 年 七月 &nbsp;(8)</option>
+<option value='http://blog.longwin.com.tw/2012/06/'> 2012 年 六月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2012/05/'> 2012 年 五月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2012/04/'> 2012 年 四月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2012/03/'> 2012 年 三月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2012/02/'> 2012 年 二月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2012/01/'> 2012 年 一月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2011/12/'> 2011 年 十二月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2011/11/'> 2011 年 十一月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2011/10/'> 2011 年 十月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2011/09/'> 2011 年 九月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2011/08/'> 2011 年 八月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2011/07/'> 2011 年 七月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2011/06/'> 2011 年 六月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2011/05/'> 2011 年 五月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2011/04/'> 2011 年 四月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2011/03/'> 2011 年 三月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2011/02/'> 2011 年 二月 &nbsp;(15)</option>
+<option value='http://blog.longwin.com.tw/2011/01/'> 2011 年 一月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2010/12/'> 2010 年 十二月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2010/11/'> 2010 年 十一月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2010/10/'> 2010 年 十月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2010/09/'> 2010 年 九月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2010/08/'> 2010 年 八月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2010/07/'> 2010 年 七月 &nbsp;(27)</option>
+<option value='http://blog.longwin.com.tw/2010/06/'> 2010 年 六月 &nbsp;(25)</option>
+<option value='http://blog.longwin.com.tw/2010/05/'> 2010 年 五月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2010/04/'> 2010 年 四月 &nbsp;(28)</option>
+<option value='http://blog.longwin.com.tw/2010/03/'> 2010 年 三月 &nbsp;(26)</option>
+<option value='http://blog.longwin.com.tw/2010/02/'> 2010 年 二月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2010/01/'> 2010 年 一月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2009/12/'> 2009 年 十二月 &nbsp;(25)</option>
+<option value='http://blog.longwin.com.tw/2009/11/'> 2009 年 十一月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2009/10/'> 2009 年 十月 &nbsp;(21)</option>
+<option value='http://blog.longwin.com.tw/2009/09/'> 2009 年 九月 &nbsp;(10)</option>
+<option value='http://blog.longwin.com.tw/2009/08/'> 2009 年 八月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2009/07/'> 2009 年 七月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2009/06/'> 2009 年 六月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2009/05/'> 2009 年 五月 &nbsp;(18)</option>
+<option value='http://blog.longwin.com.tw/2009/04/'> 2009 年 四月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2009/03/'> 2009 年 三月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2009/02/'> 2009 年 二月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2009/01/'> 2009 年 一月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2008/12/'> 2008 年 十二月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2008/11/'> 2008 年 十一月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2008/10/'> 2008 年 十月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2008/09/'> 2008 年 九月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2008/08/'> 2008 年 八月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2008/07/'> 2008 年 七月 &nbsp;(17)</option>
+<option value='http://blog.longwin.com.tw/2008/06/'> 2008 年 六月 &nbsp;(6)</option>
+<option value='http://blog.longwin.com.tw/2008/05/'> 2008 年 五月 &nbsp;(13)</option>
+<option value='http://blog.longwin.com.tw/2008/04/'> 2008 年 四月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2008/03/'> 2008 年 三月 &nbsp;(17)</option>
+<option value='http://blog.longwin.com.tw/2008/02/'> 2008 年 二月 &nbsp;(14)</option>
+<option value='http://blog.longwin.com.tw/2008/01/'> 2008 年 一月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2007/12/'> 2007 年 十二月 &nbsp;(15)</option>
+<option value='http://blog.longwin.com.tw/2007/11/'> 2007 年 十一月 &nbsp;(26)</option>
+<option value='http://blog.longwin.com.tw/2007/10/'> 2007 年 十月 &nbsp;(19)</option>
+<option value='http://blog.longwin.com.tw/2007/09/'> 2007 年 九月 &nbsp;(9)</option>
+<option value='http://blog.longwin.com.tw/2007/08/'> 2007 年 八月 &nbsp;(24)</option>
+<option value='http://blog.longwin.com.tw/2007/07/'> 2007 年 七月 &nbsp;(20)</option>
+<option value='http://blog.longwin.com.tw/2007/06/'> 2007 年 六月 &nbsp;(15)</option>
+<option value='http://blog.longwin.com.tw/2007/05/'> 2007 年 五月 &nbsp;(9)</option>
+<option value='http://blog.longwin.com.tw/2007/04/'> 2007 年 四月 &nbsp;(9)</option>
+<option value='http://blog.longwin.com.tw/2007/03/'> 2007 年 三月 &nbsp;(11)</option>
+<option value='http://blog.longwin.com.tw/2007/02/'> 2007 年 二月 &nbsp;(8)</option>
+<option value='http://blog.longwin.com.tw/2007/01/'> 2007 年 一月 &nbsp;(27)</option>
+<option value='http://blog.longwin.com.tw/2006/12/'> 2006 年 十二月 &nbsp;(32)</option>
+<option value='http://blog.longwin.com.tw/2006/11/'> 2006 年 十一月 &nbsp;(13)</option>
+<option value='http://blog.longwin.com.tw/2006/10/'> 2006 年 十月 &nbsp;(14)</option>
+<option value='http://blog.longwin.com.tw/2006/09/'> 2006 年 九月 &nbsp;(10)</option>
+<option value='http://blog.longwin.com.tw/2006/08/'> 2006 年 八月 &nbsp;(10)</option>
+<option value='http://blog.longwin.com.tw/2006/07/'> 2006 年 七月 &nbsp;(15)</option>
+<option value='http://blog.longwin.com.tw/2006/06/'> 2006 年 六月 &nbsp;(15)</option>
+<option value='http://blog.longwin.com.tw/2006/05/'> 2006 年 五月 &nbsp;(13)</option>
+<option value='http://blog.longwin.com.tw/2006/04/'> 2006 年 四月 &nbsp;(23)</option>
+<option value='http://blog.longwin.com.tw/2006/03/'> 2006 年 三月 &nbsp;(25)</option>
+<option value='http://blog.longwin.com.tw/2006/02/'> 2006 年 二月 &nbsp;(26)</option>
+<option value='http://blog.longwin.com.tw/2006/01/'> 2006 年 一月 &nbsp;(9)</option>
+<option value='http://blog.longwin.com.tw/2005/12/'> 2005 年 十二月 &nbsp;(22)</option>
+<option value='http://blog.longwin.com.tw/2005/11/'> 2005 年 十一月 &nbsp;(28)</option>
+<option value='http://blog.longwin.com.tw/2005/10/'> 2005 年 十月 &nbsp;(27)</option>
+<option value='http://blog.longwin.com.tw/2005/09/'> 2005 年 九月 &nbsp;(44)</option>
+<option value='http://blog.longwin.com.tw/2005/08/'> 2005 年 八月 &nbsp;(54)</option>
+<option value='http://blog.longwin.com.tw/2005/07/'> 2005 年 七月 &nbsp;(18)</option>
+<option value='http://blog.longwin.com.tw/2005/06/'> 2005 年 六月 &nbsp;(17)</option>
+<option value='http://blog.longwin.com.tw/2005/05/'> 2005 年 五月 &nbsp;(50)</option>
+<option value='http://blog.longwin.com.tw/2005/04/'> 2005 年 四月 &nbsp;(39)</option>
+<option value='http://blog.longwin.com.tw/2005/03/'> 2005 年 三月 &nbsp;(65)</option>
+<option value='http://blog.longwin.com.tw/2005/02/'> 2005 年 二月 &nbsp;(42)</option>
+<option value='http://blog.longwin.com.tw/2005/01/'> 2005 年 一月 &nbsp;(77)</option>
+<option value='http://blog.longwin.com.tw/2004/12/'> 2004 年 十二月 &nbsp;(94)</option>
+<option value='http://blog.longwin.com.tw/2004/11/'> 2004 年 十一月 &nbsp;(62)</option>
+<option value='http://blog.longwin.com.tw/2004/10/'> 2004 年 十月 &nbsp;(59)</option>
+<option value='http://blog.longwin.com.tw/2004/09/'> 2004 年 九月 &nbsp;(33)</option>
+<option value='http://blog.longwin.com.tw/2004/08/'> 2004 年 八月 &nbsp;(42)</option>
+<option value='http://blog.longwin.com.tw/2004/07/'> 2004 年 七月 &nbsp;(28)</option>
+<option value='http://blog.longwin.com.tw/2004/06/'> 2004 年 六月 &nbsp;(35)</option>
+<option value='http://blog.longwin.com.tw/2004/05/'> 2004 年 五月 &nbsp;(4)</option>
+<option value='http://blog.longwin.com.tw/2004/04/'> 2004 年 四月 &nbsp;(28)</option>
+<option value='http://blog.longwin.com.tw/2004/03/'> 2004 年 三月 &nbsp;(10)</option>
+</select>
+</li><li id="wpew_widgets_content-11" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">熱門標籤</h3><style>.sitetag-overlay{position:relative;_border:1px solid #ccc;_border-width:1px 0 0 1px}.sitetag-overlay .shadow b,.sitetag-overlay .shadow i{position:absolute;background:transparent url(http://static.sitetag.us/shadow.png) 0 0 repeat scroll;z-index:1;_display:none;_background:none}.sitetag-overlay .shadow{_display:none}.sitetag-overlay .shadow b+i{top:0;right:0;bottom:16px;left:auto;width:12px;background-position:100% 0}.sitetag-overlay .shadow b{left:0;right:17px;bottom:4px;height:17px;background-position:0 100%}.sitetag-overlay .shadow b+i+b{left:auto;right:0;bottom:4px;top:auto;width:17px;height:12px;background-position:100% 100%;z-index:1}.sitetag-overlay-bd{position:relative;z-index:12;margin:0 7px 7px 0;zoom:1}</style><div class="sitetag-overlay"><div class="sitetag-overlay-bd"><script type="text/javascript" src="http://pub.sitetag.us/gubadge.js?hash=5785c66d0cd372c374d01b2c680fc690&limit=30&background_color=DAD8C0&border_color=cc6633&border_width=6&inner_background_color=002&color=ffff00"></script></div><div class="shadow"><b></b><i></i><b></b></div></div></li><li id="wpew_widgets_content-12" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">網站分類標籤</h3><style>.sitetag-overlay{position:relative;_border:1px solid #ccc;_border-width:1px 0 0 1px}.sitetag-overlay .shadow b,.sitetag-overlay .shadow i{position:absolute;background:transparent url(http://static.sitetag.us/shadow.png) 0 0 repeat scroll;z-index:1;_display:none;_background:none}.sitetag-overlay .shadow{_display:none}.sitetag-overlay .shadow b+i{top:0;right:0;bottom:16px;left:auto;width:12px;background-position:100% 0}.sitetag-overlay .shadow b{left:0;right:17px;bottom:4px;height:17px;background-position:0 100%}.sitetag-overlay .shadow b+i+b{left:auto;right:0;bottom:4px;top:auto;width:17px;height:12px;background-position:100% 100%;z-index:1}.sitetag-overlay-bd{position:relative;z-index:12;margin:0 7px 7px 0;zoom:1}</style><div class="sitetag-overlay"><div class="sitetag-overlay-bd"><script type="text/javascript" src="http://pub.sitetag.us/gsbadge.js?hash=5785c66d0cd372c374d01b2c680fc690&limit=30&background_color=FFFFFF&border_color=666666&border_width=6&inner_background_color=FFFFFF&color=0E0E33"></script></div><div class="shadow"><b></b><i></i><b></b></div></div></li><li id="wpew_widgets_content-8" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">Stock Market Finance</h3><div align="center" width="210px" style="font-size:12px"><iframe width="210" height="410" style="margin-bottom:5px" src="http://www.sanebull.com/widget_world_watch.jsp?market=all" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><br/><a href="http://www.sanebull.com/widgets" target="_top">Stock Market Finance Widgets</a></div></li><li id="wpew_widgets_content-13" class="widget-container widget_wpew_widgets_content"><style>h1,h2,h3,h4,h5,h6{font-weight:bold}</style></li>	</ul>
+</div><!-- #primary .widget-area -->
+</div><!-- #main -->
+<div id="footer" role="contentinfo">
+<div id="colophon">
+<div id="footer-widget-area" role="complementary">
+<div id="first" class="widget-area">
+<ul class="xoxo">
+<li id="search-3" class="widget-container widget_search"><h3 class="widget-title">Search</h3><form role="search" method="get" id="searchform" class="searchform" action="http://blog.longwin.com.tw/">
+<div>
+<label class="screen-reader-text" for="s">搜尋關於：</label>
+<input type="text" value="" name="s" id="s"/>
+<input type="submit" id="searchsubmit" value="搜尋"/>
+</div>
+</form></li><li id="linkcat-37" class="widget-container widget_links"><h3 class="widget-title">好友 與 Blog</h3>
+<ul class='xoxo blogroll'>
+<li><a href="http://www.neo.com.tw/" rel="friend" target="_blank">Neo&#039;s Blog</a></li>
+</ul>
+</li>
+<li id="linkcat-35" class="widget-container widget_links"><h3 class="widget-title">好站連結</h3>
+<ul class='xoxo blogroll'>
+<li><a href="http://www.flickr.com/photos/tsung/" target="_blank">Flickr Photo</a></li>
+<li><a href="http://golangd.com/" target="_blank">Go 程式語言討論區</a></li>
+<li><a href="https://plus.google.com/102624495263698082690?rel=author" rel="me" target="_blank">Google+</a></li>
+<li><a href="http://wordtalks.com/" rel="me" target="_blank">WordTalks</a></li>
+<li><a href="http://wowtree.com/" rel="me" target="_blank">wowTree</a></li>
+<li><a href="http://blog.longwin.com.tw/2005/04/my_favorite_list/" rel="me">好站連結</a></li>
+<li><a href="http://name.longwin.com.tw/" rel="me" target="_blank">英文名字翻譯轉換</a></li>
+<li><a href="http://www.feebee.com.tw/" title="飛快比價，比了再買" target="_blank">飛比價格 比價網</a></li>
+</ul>
+</li>
+<li id="linkcat-36" class="widget-container widget_links"><h3 class="widget-title">贊助商</h3>
+<ul class='xoxo blogroll'>
+<li><a href="http://www.longwin.com.tw/" rel="me" target="_blank">隆瑩寢飾精品</a></li>
+</ul>
+</li>
+</ul>
+</div><!-- #first .widget-area -->
+<div id="second" class="widget-area">
+<ul class="xoxo">
+<li id="facebook-likebox-2" class="widget-container widget_facebook_likebox"><h3 class="widget-title"><a href="https://www.facebook.com/tsungnote">Tsung&#039;s Note FB 粉絲團</a></h3><iframe src="https://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Ftsungnote&#038;width=260&#038;height=485&#038;colorscheme=light&#038;show_faces=true&#038;stream=false&#038;show_border=true&#038;header=false&#038;force_wall=true&#038;locale=zh_TW" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 260px;  height: 485px; background: #fff"></iframe></li>	</ul>
+</div><!-- #second .widget-area -->
+<div id="third" class="widget-area">
+<ul class="xoxo">
+<li id="calendar-3" class="widget-container widget_calendar"><h3 class="widget-title">日曆</h3><div id="calendar_wrap"><table id="wp-calendar">
+<caption>五月 2009</caption>
+<thead>
+<tr>
+<th scope="col" title="星期一">一</th>
+<th scope="col" title="星期二">二</th>
+<th scope="col" title="星期三">三</th>
+<th scope="col" title="星期四">四</th>
+<th scope="col" title="星期五">五</th>
+<th scope="col" title="星期六">六</th>
+<th scope="col" title="星期日">日</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<td colspan="3" id="prev"><a href="http://blog.longwin.com.tw/2009/04/">&laquo; 四月</a></td>
+<td class="pad">&nbsp;</td>
+<td colspan="3" id="next"><a href="http://blog.longwin.com.tw/2009/06/">六月 &raquo;</a></td>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+</tr>
+<tr>
+<td><a href="http://blog.longwin.com.tw/2009/05/04/" title="Linux 程式開發用編輯器 - Geany">4</a></td><td><a href="http://blog.longwin.com.tw/2009/05/05/" title="好文: 如何閱讀他人的程式碼">5</a></td><td><a href="http://blog.longwin.com.tw/2009/05/06/" title="Linux 將 Ext3 轉換成 Ext4 文件">6</a></td><td><a href="http://blog.longwin.com.tw/2009/05/07/" title="用 JavaScript 產生 PDF 檔">7</a></td><td><a href="http://blog.longwin.com.tw/2009/05/08/" title="Debian Linux 架設使用 SSH 存取 的 Git Server">8</a></td><td>9</td><td>10</td>
+</tr>
+<tr>
+<td><a href="http://blog.longwin.com.tw/2009/05/11/" title="Debian Linux 架設使用 HTTP 存取 的 Git Server">11</a></td><td><a href="http://blog.longwin.com.tw/2009/05/12/" title="Debian Linux 架設 Gitweb">12</a></td><td><a href="http://blog.longwin.com.tw/2009/05/13/" title="Debian Linux 架設 Git + Trac">13</a></td><td><a href="http://blog.longwin.com.tw/2009/05/14/" title="Git 初學文件整理">14</a></td><td><a href="http://blog.longwin.com.tw/2009/05/15/" title="Git 基礎設定 (帳號的環境參數設定)">15</a></td><td>16</td><td>17</td>
+</tr>
+<tr>
+<td><a href="http://blog.longwin.com.tw/2009/05/18/" title="Git 透過 Email 傳送 Patch / Commit">18</a></td><td><a href="http://blog.longwin.com.tw/2009/05/19/" title="Git 初學筆記 - 指令操作教學">19</a></td><td><a href="http://blog.longwin.com.tw/2009/05/20/" title="Git 初學筆記 - 實作測試">20</a></td><td><a href="http://blog.longwin.com.tw/2009/05/21/" title="Regular Expression 判斷 1-99">21</a></td><td><a href="http://blog.longwin.com.tw/2009/05/22/" title="PHP 在 Windows Vista 開 中文名稱 資料夾 該用何種編碼">22</a></td><td>23</td><td>24</td>
+</tr>
+<tr>
+<td><a href="http://blog.longwin.com.tw/2009/05/25/" title="SrtEdit 修正字幕檔的時間 (Windows)">25</a></td><td><a href="http://blog.longwin.com.tw/2009/05/26/" title="於 Linux 移除 Mp3 的 所有 ID3 Tag">26</a></td><td><a href="http://blog.longwin.com.tw/2009/05/27/" title="書摘: 簡單的法則">27</a></td><td>28</td><td>29</td><td>30</td><td>31</td>
+</tr>
+</tbody>
+</table></div></li><li id="wpew_widgets_content-5" class="widget-container widget_wpew_widgets_content"><h3 class="widget-title">Google Calendar</h3><iframe src="//www.google.com/calendar/embed?title=Todo%20Calendar&showTitle=0&mode=AGENDA&height=250&wkst=1&bgcolor=%23FFFFFF&src=tsunghao%40gmail.com&color=%232952A3&ctz=Asia%2FTaipei" style=" border-width:0 " width="220" height="250" frameborder="0" scrolling="no"></iframe></li>	</ul>
+</div><!-- #third .widget-area -->
+<div id="fourth" class="widget-area">
+<ul class="xoxo">
+<li id="meta-3" class="widget-container widget_meta"><h3 class="widget-title">管理區</h3>	<ul>
+<li><a rel="nofollow" href="http://blog.longwin.com.tw/wp-login.php">登入</a></li>
+<li><a href="http://blog.longwin.com.tw/feed/">文章 <abbr title="Really Simple Syndication">RSS</abbr> 訂閱</a></li>
+<li><a href="http://blog.longwin.com.tw/comments/feed/">迴響 <abbr title="Really Simple Syndication">RSS</abbr> 訂閱</a></li>
+<li><a href="http://tw.wordpress.org/" title="使用 WordPress 建置，最先進的語意化個人出版平台。">WordPress 台灣正體中文</a></li>	</ul>
+</li><li id="blog_subscription-2" class="widget-container jetpack_subscription_widget"><h3 class="widget-title">適用電子郵件訂閱網站</h3>
+<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+<div id="subscribe-text"><p>輸入你的電子郵件地址訂閱網站的新文章，使用電子郵件接收新通知。</p>
+</div><p>訂閱 34 其他用戶 </p>
+<p id="subscribe-email">
+<label id="jetpack-subscribe-label" for="subscribe-field">
+電子郵件位址	</label>
+<input type="email" name="email" required="required" class="required" value="" id="subscribe-field" placeholder="電子郵件位址"/>
+</p>
+<p id="subscribe-submit">
+<input type="hidden" name="action" value="subscribe"/>
+<input type="hidden" name="source" value="http://blog.longwin.com.tw/2009/05/git-learn-initial-document-2009/"/>
+<input type="hidden" name="sub-type" value="widget"/>
+<input type="hidden" name="redirect_fragment" value="blog_subscription-2"/>
+<input type="submit" value="訂閱" name="jetpack_subscriptions_widget"/>
+</p>
+</form>
+<script>(function(d){if(('placeholder'in d.createElement('input'))){var label=d.getElementById('jetpack-subscribe-label');label.style.clip='rect(1px, 1px, 1px, 1px)';label.style.position='absolute';label.style.height='1px';label.style.width='1px';label.style.overflow='hidden';}})(document);jQuery('#subscribe-blog-blog_subscription-2').submit(function(event){var requiredInput=jQuery(this).find('.required');if(requiredInput.val()==''){event.preventDefault();requiredInput.focus();}});</script>
+</li><li id="wpew_widgets_content-6" class="widget-container widget_wpew_widgets_content"><p style="text-align:center;"><a href="http://feeds2.feedburner.com/tsungblog"><img src="http://feeds2.feedburner.com/~fc/tsungblog?bg=99CCFF&fg=444444&anim=0" height="26" width="88" style="border:0" alt="" pagespeed_url_hash="879062353" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a></p>
+<p style="text-align:center;"><a href="http://pagerank.easylife.tw" target="_blank" title="Google PageRank查詢"><img src="http://pagerank.easylife.tw/pagerank.php?skin=ng1&url=blog.longwin.com.tw" border="0" alt="Google PageRank查詢" onerror="this.style.display='none';" rel="nofollow" pagespeed_url_hash="3103761371" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a></p>
+<script type="text/javascript" src="http://track.sitetag.us/tracking.js?hash=5785c66d0cd372c374d01b2c680fc690"></script>
+<!--<script type="text/javascript" src="http://click.longwin.com.tw/js/click_min.js?hash=5785c66d0cd372c374d01b2c680fc690"></script>-->
+<style>blockquote{font-family:Georgia,serif;font-size:18px;font-style:normal;margin:.25em 0;padding:.25em 40px;line-height:1.45;position:relative;color:#383838;background:#ececec}blockquote:before{display:block;content:"\201C";font-size:80px;position:absolute;left:-35px;top:-25px;color:#7a7a7a}blockquote cite{color:#999;font-size:14px;display:block;margin-top:5px}blockquote cite:before{content:"\2014 \2009"}.entry-content p{line-height:1.7em;text-align:justify;text-justify:ideographic;margin:0;text-indent:2em;margin-after:.5em;word-break:break-all}.entry-content em{font-style:normal}.entry-content ul,ol{margin-left:4em}.entry-content{letter-spacing:.2px}</style></li>	</ul>
+</div><!-- #fourth .widget-area -->
+</div><!-- #footer-widget-area -->
+<div id="site-info">
+<a href="http://blog.longwin.com.tw/" title="Tsung&#039;s Blog" rel="home">
+Tsung&#039;s Blog	</a>
+</div><!-- #site-info -->
+<div id="site-generator">
+<a href="http://tw.wordpress.org/" title="個人語意出版平台">使用 WordPress 建置。</a>
+</div><!-- #site-generator -->
+</div><!-- #colophon -->
+</div><!-- #footer -->
+</div><!-- #wrapper -->
+<!--MP Share Center Scripts--><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><!--Twitter Tweet Button--><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script><!--Google +1 Button--><script type="text/javascript" src="http://platform.linkedin.com/in.js"></script><!--LinkedIn Share Button-->	<div style="display:none">
+<div class="grofile-hash-map-b636a9bf35d30f7781db075f241e6fb2">
+</div>
+</div>
+<script type="text/javascript">window.WPCOM_sharing_counts={"http:\/\/blog.longwin.com.tw\/2009\/05\/git-learn-initial-document-2009\/":1602};window.WPCOM_jetpack=true;</script>
+<div id="sharing_email" style="display: none;">
+<form action="/2009/05/git-learn-initial-document-2009/" method="post">
+<label for="target_email">寄到電子郵件位址</label>
+<input type="email" name="target_email" id="target_email" value=""/>
+<label for="source_name">帳號</label>
+<input type="text" name="source_name" id="source_name" value=""/>
+<label for="source_email">你的Email</label>
+<input type="email" name="source_email" id="source_email" value=""/>
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off"/>
+<script>document.getElementById('jetpack-source_f_name').value='';</script>
+<img style="float: right; display: none" class="loading" src="data:image/gif;base64,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" alt="loading" pagespeed_url_hash="38476114" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/>
+<input type="submit" value="寄送電子郵件" class="sharing_send"/>
+<a rel="nofollow" href="#cancel" class="sharing_cancel">取消</a>
+<div class="errors errors-1" style="display: none;">
+文章沒有送出-請確認你的Email位置	</div>
+<div class="errors errors-2" style="display: none;">
+Email確認失敗,請稍後再試.	</div>
+<div class="errors errors-3" style="display: none;">
+抱歉，你的網誌無法透過電子郵件分享	</div>
+</form>
+</div>
+<script type="text/javascript">var windowOpen;jQuery(document).on('ready post-load',function(){jQuery('a.share-facebook').on('click',function(){if('undefined'!==typeof windowOpen){windowOpen.close();}
+windowOpen=window.open(jQuery(this).attr('href'),'wpcomfacebook','menubar=1,resizable=1,width=600,height=400');return false;});});</script>
+<script type="text/javascript">var windowOpen;jQuery(document).on('ready post-load',function(){jQuery('a.share-linkedin').on('click',function(){if('undefined'!==typeof windowOpen){windowOpen.close();}
+windowOpen=window.open(jQuery(this).attr('href'),'wpcomlinkedin','menubar=1,resizable=1,width=580,height=450');return false;});});</script>
+<script type="text/javascript">var windowOpen;jQuery(document).on('ready post-load',function(){jQuery('a.share-twitter').on('click',function(){if('undefined'!==typeof windowOpen){windowOpen.close();}
+windowOpen=window.open(jQuery(this).attr('href'),'wpcomtwitter','menubar=1,resizable=1,width=600,height=350');return false;});});</script>
+<script type="text/javascript">var windowOpen;jQuery(document).on('ready post-load',function(){jQuery('a.share-google-plus-1').on('click',function(){if('undefined'!==typeof windowOpen){windowOpen.close();}
+windowOpen=window.open(jQuery(this).attr('href'),'wpcomgoogle-plus-1','menubar=1,resizable=1,width=480,height=550');return false;});});</script>
+<script src="http://blog.longwin.com.tw/wp-content,_plugins,_akismet,__inc,_form.js,qver==3.1.1+wp-includes,_js,_comment-reply.min.js,qver==4.2.2.pagespeed.jc.APBj1pT44C.js"></script><script>eval(mod_pagespeed_w0j0wNNgNS);</script>
+<script>eval(mod_pagespeed_O883pN9VWD);</script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201520'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>//<![CDATA[
+var WPGroHo={"my_hash":""};
+//]]></script>
+<script src="http://blog.longwin.com.tw/wp-content/plugins/jetpack/modules/wpgroho.js,qver==4.2.2+likes,_queuehandler.js,qver==3.5.3.pagespeed.jc.GMUPl1ocdt.js"></script><script>eval(mod_pagespeed_QC_sbEFxl7);</script>
+<script>eval(mod_pagespeed_UKJ5oDi0GJ);</script>
+<script type='text/javascript'>//<![CDATA[
+var sharing_js_options={"lang":"en","counts":"1"};
+//]]></script>
+<script type='text/javascript' src='http://blog.longwin.com.tw/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js,qver=3.5.3.pagespeed.jm.7LYyzdKKUn.js'></script>
+<iframe src='http://widgets.wp.com/likes/master.html?ver=20141028#ver=20141028&amp;lang=zh-tw&amp;mp6=1' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> 位部落客按了讚：</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script type='text/javascript' src='http://stats.wp.com/e-201520.js' async defer></script>
+<script type='text/javascript'>_stq=window._stq||[];_stq.push(['view',{v:'ext',j:'1:3.5.3',blog:'21486538',post:'1602',tz:'8',srv:'blog.longwin.com.tw'}]);_stq.push(['clickTrackerInit','21486538','1602']);</script>
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using memcached
+Database Caching 3/37 queries in 0.017 seconds using memcached
+Object Caching 3475/3547 objects using memcached
+
+ Served from: blog.longwin.com.tw @ 2015-05-12 12:36:32 by W3 Total Cache -->
